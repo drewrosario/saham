@@ -1,0 +1,1 @@
+This file also contains sample text for testing. It serves a similar purpose as sample1.txt.

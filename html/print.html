@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Article: Web Design Principles</title>
+    <style>
+        /* Base styles for both screen and print */
+        body {
+            font-family: 'Georgia', serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            color: #333;
+        }
+        
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Screen-only styles */
+        @media screen {
+            header {
+                background-color: #2c3e50;
+                color: white;
+                padding: 1rem 0;
+            }
+            
+            nav ul {
+                display: flex;
+                list-style: none;
+                margin: 0;
+                padding: 0;
+            }
+            
+            nav li {
+                margin-right: 1.5rem;
+            }
+            
+            nav a {
+                color: white;
+                text-decoration: none;
+            }
+            
+            .content-wrapper {
+                display: grid;
+                grid-template-columns: 3fr 1fr;
+                gap: 2rem;
+                margin: 2rem 0;
+            }
+            
+            aside {
+                background-color: #f5f5f5;
+                padding: 1rem;
+                border-radius: 5px;
+            }
+            
+            footer {
+                background-color: #f1f1f1;
+                padding: 1rem 0;
+                text-align: center;
+                margin-top: 2rem;
+            }
+        }
+        
+        /* Print-specific styles */
+        @media print {
+            body {
+                font-size: 12pt;
+                line-height: 1.5;
+                color: black;
+            }
+            
+            header nav, aside, footer, .comments-section {
+                display: none;
+            }
+            
+            header {
+                border-bottom: 1pt solid #999;
+                margin-bottom: 1cm;
+            }
+            
+            .content-wrapper {
+                display: block;
+            }
+            
+            h1 {
+                font-size: 18pt;
+                margin-top: 0;
+            }
+            
+            h2 {
+                font-size: 16pt;
+                page-break-after: avoid;
+            }
+            
+            p, h2, h3 {
+                orphans: 3;
+                widows: 3;
+            }
+            
+            img {
+                max-width: 100% !important;
+                page-break-inside: avoid;
+            }
+            
+            a {
+                color: black;
+                text-decoration: none;
+            }
+            
+            /* Show URLs for links */
+            a[href]:after {
+                content: " (" attr(href) ")";
+                font-size: 90%;
+                color: #555;
+            }
+            
+            /* Page numbers */
+            @page {
+                margin: 2cm;
+                @bottom-center {
+                    content: "Page " counter(page);
+                }
+            }
+        }
+        
+        /* Shared styles */
+        article img {
+            max-width: 100%;
+            height: auto;
+            margin: 1rem 0;
+        }
+        
+        .meta {
+            font-style: italic;
+            color: #666;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>Design Journal</h1>
+            <nav>
+                <ul>
+                    <li><a href="#">Home</a></li>
+                    <li><a href="#">Articles</a></li>
+                    <li><a href="#">Resources</a></li>
+                    <li><a href="#">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+    
+    <div class="container">
+        <div class="content-wrapper">
+            <main>
+                <article>
+                    <h1>Effective Web Design for Multiple Mediums</h1>
+                    <p class="meta">By Jane Designer | Published: April 20, 2023</p>
+                    
+                    <img src="https://via.placeholder.com/800x400" alt="Responsive design example">
+                    
+                    <p>Creating content that works seamlessly across different mediums requires thoughtful planning. Whether viewed on a screen or printed on paper, your design should maintain clarity and purpose.</p>
+                    
+                    <h2>Key Design Principles</h2>
+                    <p>When designing for both web and print, consider these fundamental principles that work across mediums:</p>
+                    
+                    <ul>
+                        <li>Use a clear hierarchy of information</li>
+                        <li>Choose readable typography for both screen and print</li>
+                        <li>Maintain sufficient contrast between text and background</li>
+                        <li>Use whitespace effectively to improve readability</li>
+                    </ul>
+                    
+                    <h2>Technical Implementation</h2>
+                    <p>CSS media queries make it possible to provide different styling rules when a user prints your webpage. This allows you to:</p>
+                    
+                    <ul>
+                        <li>Hide navigation elements and interactive features</li>
+                        <li>Adjust typography for improved readability on paper</li>
+                        <li>Reformatting layouts to work with the constraints of printed pages</li>
+                        <li>Display full URLs for hyperlinks that would be clickable online</li>
+                    </ul>
+                    
+                    <p>This very page demonstrates these principles. Try printing it (or using print preview) to see how the design adapts!</p>
+                </article>
+                
+                <section class="comments-section">
+                    <h2>Comments</h2>
+                    <div class="comment">
+                        <p><strong>Alex Chen</strong>: This was really helpful for my current project.</p>
+                    </div>
+                    <div class="comment">
+                        <p><strong>Taylor Kim</strong>: Could you expand on print-specific typography in a future article?</p>
+                    </div>
+                </section>
+            </main>
+            
+            <aside>
+                <h3>Related Resources</h3>
+                <ul>
+                    <li><a href="#">CSS Print Media Queries</a></li>
+                    <li><a href="#">Typography for Readability</a></li>
+                    <li><a href="#">Color Theory Basics</a></li>
+                </ul>
+                
+                <h3>Newsletter</h3>
+                <form>
+                    <p>Get design tips in your inbox:</p>
+                    <input type="email" placeholder="Your email">
+                    <button type="submit">Subscribe</button>
+                </form>
+            </aside>
+        </div>
+    </div>
+    
+    <footer>
+        <div class="container">
+            <p>&copy; 2023 Design Journal. All rights reserved.</p>
+            <p><a href="#">Privacy Policy</a> | <a href="#">Terms of Use</a></p>
+        </div>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64"><!-- Background -->
+<rect x="0" y="0" width="64" height="64" rx="8" fill="#2563eb" />
+
+<!-- Stock chart line -->
+<polyline 
+points="8,48 16,36 24,40 32,20 40,28 48,16 56,24" 
+stroke="#ffffff" 
+stroke-width="4" 
+fill="none" 
+stroke-linecap="round" 
+stroke-linejoin="round" />
+
+<!-- Up arrow indicator -->
+<polygon 
+points="48,8 54,14 42,14" 
+fill="#4ade80" />
+
+<!-- Down arrow indicator -->
+<polygon 
+points="16,50 22,56 10,56" 
+fill="#ef4444" 
+transform="rotate(180 16 53)" />
+</svg>

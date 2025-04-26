@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Expandable Markdown Sections</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/marked/4.3.0/marked.min.js"></script>
+    <style>
+        /* Collapsible container style */
+        .markdown-section {
+            border: 1px solid #ccc;
+            padding: 15px;
+            background: #f9f9f9;
+            margin-top: 10px;
+            display: none; /* Initially hidden */
+        }
+
+        .toggle-button {
+            cursor: pointer;
+            color: blue;
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Expandable Markdown Sections</h1>
+
+    <div class="markdown-container" data-md-file="extra-info1.md">
+        <p class="toggle-button">View More Information 1</p>
+        <div class="markdown-section">
+            <div class="markdown-content"></div>
+        </div>
+    </div>
+
+    <div class="markdown-container" data-md-file="extra-info2.md">
+        <p class="toggle-button">View More Information 2</p>
+        <div class="markdown-section">
+            <div class="markdown-content"></div>
+        </div>
+    </div>
+
+    <div class="markdown-container" data-md-file="extra-info3.md">
+        <p class="toggle-button">View More Information 3</p>
+        <div class="markdown-section">
+            <div class="markdown-content"></div>
+        </div>
+    </div>
+
+    <script>
+
+        function preloadMarkdownFiles(containers) {
+    containers.forEach(container => {
+        const mdFile = container.dataset.mdFile;
+
+        fetch(mdFile)
+            .then(response => response.text())
+            .then(mdContent => {
+                container.dataset.cachedContent = mdContent; // Cache the content
+            })
+            .catch(error => console.error(`Error preloading Markdown file ${mdFile}:`, error));
+    });
+}
+
+        // Function to handle the toggle action for Markdown sections
+        function setupMarkdownSections() {
+            // Get all markdown container elements
+            const containers = document.querySelectorAll('.markdown-container');
+
+            // Loop through each container to set up the toggle functionality
+            containers.forEach(container => {
+                const toggleButton = container.querySelector('.toggle-button');
+                const markdownSection = container.querySelector('.markdown-section');
+                const contentDiv = container.querySelector('.markdown-content');
+                
+                let isMarkdownLoaded = false; // Track if the Markdown has been loaded
+
+                toggleButton.addEventListener('click', () => {
+                    if (markdownSection.style.display === 'none') {
+                        markdownSection.style.display = 'block';
+
+                        // Fetch Markdown file only once
+                        if (!isMarkdownLoaded) {
+                            const mdFile = container.dataset.mdFile; // Get filename from data attribute
+                            fetch(mdFile)
+                                .then(response => response.text())
+                                .then(mdContent => {
+                                    contentDiv.innerHTML = marked.parse(mdContent);
+                                    isMarkdownLoaded = true; // Update loaded status
+                                })
+                                .catch(error => console.error('Error loading Markdown file:', error));
+                        }
+                    } else {
+                        markdownSection.style.display = 'none';
+                    }
+                });
+            });
+        }
+
+        // Set up Markdown sections on page load
+        window.onload = () => {
+    const containers = document.querySelectorAll('.markdown-container');
+    preloadMarkdownFiles(containers); // Preload Markdown files
+    setupMarkdownSections(containers); // Set up expandable sections
+};
+
+    </script>
+</body>
+</html>
